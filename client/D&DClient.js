@@ -1,7 +1,8 @@
 const fetch = require('node-fetch')
+const constants = require('./../constants')
 
 const getSpell = (spellName, additionalParam) => {
-  return fetch(`https://www.dnd5eapi.co/api/spells/${spellName}`)
+  return fetch(`${constants.DND_API_BASE_URL}/spells/${spellName}`)
     .then(res => {
       return res.json()
     })
@@ -19,7 +20,7 @@ const getSpell = (spellName, additionalParam) => {
 }
 
 const getSpellsByLevel = (level) => {
-  return fetch(`https://www.dnd5eapi.co/api/spells?level=${level}`)
+  return fetch(`${constants.DND_API_BASE_URL}/spells?level=${level}`)
     .then(res => {
       return res.json()
     })
@@ -34,7 +35,7 @@ const getSpellsByLevel = (level) => {
 }
 
 const getAllSkills = () => {
-  return fetch('https://www.dnd5eapi.co/api/skills')
+  return fetch(`${constants.DND_API_BASE_URL}/skills`)
     .then(res => {
       return res.json()
     })
@@ -45,7 +46,7 @@ const getAllSkills = () => {
 }
 
 const getSkillDescription = (skillName) => {
-  return fetch(`https://www.dnd5eapi.co/api/skills/${skillName.toLowerCase()}`)
+  return fetch(`${constants.DND_API_BASE_URL}/skills/${skillName.toLowerCase()}`)
     .then(res => {
       return res.json()
     })
