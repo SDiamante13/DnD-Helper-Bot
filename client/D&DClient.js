@@ -1,7 +1,7 @@
 const fetch = require('node-fetch')
 const constants = require('./../constants')
 
-const getSpell = (spellName, additionalParam) => {
+const getSpellDescription = (spellName) => {
   return fetch(`${constants.DND_API_BASE_URL}/spells/${spellName}`)
     .then(res => {
       return res.json()
@@ -11,11 +11,7 @@ const getSpell = (spellName, additionalParam) => {
         return `The spell ${spellName} was not found.`
       }
 
-      if (additionalParam) {
-        return data[additionalParam]
-      } else {
         return data.desc[0]
-      }
     })
 }
 
@@ -57,7 +53,7 @@ const getSkillDescription = (skillName) => {
     })
 }
 
-exports.getSpell = getSpell
-exports.getSpellsByLevel = getSpellsByLevel
-exports.getAllSkills = getAllSkills
-exports.getSkillDescription = getSkillDescription
+module.exports.getSpellDescription = getSpellDescription
+module.exports.getSpellsByLevel = getSpellsByLevel
+module.exports.getAllSkills = getAllSkills
+module.exports.getSkillDescription = getSkillDescription
