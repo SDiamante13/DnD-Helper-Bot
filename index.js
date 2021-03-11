@@ -1,28 +1,35 @@
 const Discord = require('discord.js');
-const { commands } = require('./commands');
-const client = new Discord.Client();
-const {
-	sendMessageAboutSpells,
-	sendMessageAboutSkills,
-	sendHelp,
-} = require('./service/BotMessenger');
+const fs = require('fs');
+const bot = new Discord.Client();
+bot.commands = new Discord.Collection();
+const prefix = '!';
 
-client.on('ready', () => {
-	console.log(`Logged in as ${client.user.tag}!`);
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+
+	bot.commands.set(command.name, command);
+}
+
+bot.on('ready', () => {
+	console.log(`Logged in as ${bot.user.tag}!`);
 });
 
-client.on('message', msg => {
-	if (msg.author.bot) return;
+bot.on('message', message => {
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	switch (msg.content.split(/ +/)[0]) {
-	case (commands.spell.value):
-		sendMessageAboutSpells(msg);
+	const args = message.content.slice(prefix.length).split(/ +/);
+	const command = args.shift().toLowerCase();
+
+	switch (command) {
+	case ('spell'):
+		bot.commands.get('spell').execute(message, args);
 		break;
-	case (commands.skill.value):
-		sendMessageAboutSkills(msg);
+	case ('skill'):
+		bot.commands.get('skill').execute(message, args);
 		break;
-	case (commands.help.value):
-		sendHelp(msg);
+	case ('help'):
+		bot.commands.get('help').execute(message, args);
 		break;
 	default:
     // noop
@@ -33,4 +40,4 @@ process.on('unhandledRejection', error => {
 	console.error('Unhandled promise rejection:', error);
 });
 
-client.login(process.env.TOKEN);
+bot.login(process.env.TOKEN);

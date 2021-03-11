@@ -1,10 +1,14 @@
 {
   "name": "DnD-Helper-Bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "A helpful bot who is way too into Dungeons & Dragons and will answer all of your DnD related inquiries.",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/SDiamante13/DnD-Helper-Bot.git"
+  },
   "scripts": {
-    "eslint": "eslint . --fix",
+    "lint": "eslint . --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
