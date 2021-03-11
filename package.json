@@ -4,13 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "eslint": "eslint . --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "dungeons",
+    "dragons",
+    "rpg"
+  ],
+  "author": "Steven Diamante",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.5.1",
     "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.21.0"
   }
 }
