@@ -10,6 +10,7 @@ for (const file of commandFiles) {
 
 	bot.commands.set(command.name, command);
 }
+// testing
 
 bot.on('ready', () => {
 	console.log(`Logged in as ${bot.user.tag}!`);
