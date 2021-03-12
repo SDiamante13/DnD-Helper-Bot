@@ -10,7 +10,7 @@ const getSpellDescription = (spellName) => {
 			if (data.error) {
 				return `The spell ${spellName} was not found.`;
 			}
-
+      
 			return data.desc[0];
 		});
 };
@@ -68,8 +68,40 @@ const getSkillDescription = (skillName) => {
 		});
 };
 
+const getAllWeapons = () => {
+	return fetch(`${DND_API_BASE_URL}/equipment-categories/weapon`)
+		.then(res => {
+			return res.json();
+		})
+		.then(data => {
+			const weapons = data.equipment
+      .filter(weapon => !weapon.url.includes('magic'))
+      .map(weapon => weapon.index);
+			return weapons.toString().split(',').join('\n');
+		});
+};
+
+const getWeaponStats = (weaponName) => {
+	return fetch(`${DND_API_BASE_URL}/equipment/${weaponName.toLowerCase()}`)
+		.then(res => {
+			return res.json();
+		})
+		.then(data => {
+      if (data.error) {
+        return `The weapon ${weaponName} was not found.`
+      } 
+      const damageDice = data.damage.damage_dice;
+      const range = data.range.long != null ? 
+      `${data.range.normal}, ${data.range.long}` :
+       `${data.range.normal}`
+			return `Damage Dice: ${damageDice} \nRange: ${range}`;
+		});
+};
+
 module.exports.getSpellDescription = getSpellDescription;
 module.exports.getSpellsByLevel = getSpellsByLevel;
 module.exports.searchSpellsByName = searchSpellsByName;
 module.exports.getAllSkills = getAllSkills;
 module.exports.getSkillDescription = getSkillDescription;
+module.exports.getAllWeapons = getAllWeapons;
+module.exports.getWeaponStats = getWeaponStats;

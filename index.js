@@ -22,13 +22,16 @@ bot.on('message', message => {
 	const command = args.shift().toLowerCase();
 
 	switch (command) {
-	case ('spell'):
+	case 'spell':
 		bot.commands.get('spell').execute(message, args);
 		break;
-	case ('skill'):
+	case 'skill':
 		bot.commands.get('skill').execute(message, args);
 		break;
-	case ('help'):
+	case 'weapon':
+		bot.commands.get('weapon').execute(message, args);
+		break;
+	case 'help':
 		bot.commands.get('help').execute(message, args);
 		break;
 	default:

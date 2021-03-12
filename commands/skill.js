@@ -1,4 +1,4 @@
-const dndClient = require('./../client/D&DClient');
+const { getAllSkills, getSkillDescription } = require('./../client/D&DClient');
 
 const help = `Skill Commands:\n
     !skill help - Prints available commands for !skill\n
@@ -14,11 +14,11 @@ module.exports = {
 
 		switch (subCommand) {
 		case 'list':
-			dndClient.getAllSkills()
+			getAllSkills()
 		    .then(skills => message.channel.send(skills));
 			break;
 		case 'desc':
-			dndClient.getSkillDescription(inputs[0])
+			getSkillDescription(inputs[0])
 		      .then(skillDescription => message.channel.send(skillDescription));
 			break;
 		case 'help':
