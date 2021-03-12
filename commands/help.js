@@ -3,7 +3,7 @@ const help = `Available commands:\n
     !help\n
     !spell\n 
     !skill\n
-    !equipment\n`;
+    !weapon\n`;
 
 module.exports = {
 	name: 'help',
