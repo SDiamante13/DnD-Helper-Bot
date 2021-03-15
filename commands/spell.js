@@ -23,7 +23,18 @@ module.exports = {
 	  	  break;
     	case 'desc':
 	  	  getSpellDescription(inputs[0])
-		     .then(spellDescription => message.channel.send(spellDescription));
+		     .then(spellDescription => {
+					if (spellDescription.length > 1900) {
+						spellDescription.split('\n')
+							.filter(desc => desc.length > 0)
+							.forEach(desc => {
+								message.channel.send(desc);
+							});
+					}
+					else {
+						message.channel.send(spellDescription);
+					}
+				});
 	  	  break;
   	  case 'search':
 	  	  searchSpellsByName(inputs[0])
