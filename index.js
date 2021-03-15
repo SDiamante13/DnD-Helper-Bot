@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const keepAlive = require('./server.js');
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 const prefix = '!';
@@ -43,4 +44,5 @@ process.on('unhandledRejection', error => {
 	console.error('Unhandled promise rejection:', error);
 });
 
+keepAlive();
 bot.login(process.env.TOKEN);
