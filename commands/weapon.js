@@ -17,8 +17,8 @@ module.exports = {
 				.then(weapons => message.channel.send(weapons));
 	  	  break;
     	case 'stats':
-        getWeaponStats(inputs[0])
-          .then(stats => message.channel.send(stats));
+			getWeaponStats(inputs[0])
+				.then(stats => message.channel.send(stats));
 	  	  break;
   	  case 'help':
 	    default:
