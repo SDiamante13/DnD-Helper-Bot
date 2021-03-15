@@ -11,7 +11,11 @@ const getSpellDescription = (spellName) => {
 				return `The spell ${spellName} was not found.`;
 			}
 
-			return data.desc[0];
+			const range = data.range === 'Self' ? '' : ` with a range of ${data.range}`;
+			const classes = data.classes.map(c => c.name);
+			const higherLevel = data.higher_level ? `\n\n${data.higher_level}\n` : '';
+
+			return `${data.name} is a level ${data.level} spell${range}.\nClasses: ${classes.join(', ')}\n\n${data.desc.join('\n')} ${higherLevel}`;
 		});
 };
 
@@ -110,10 +114,11 @@ const getWeaponStats = (weaponName) => {
 				return `The weapon ${weaponName} was not found.`;
 			}
 			const damageDice = data.damage.damage_dice;
+			const damageType = data.damage.damage_type.name;
 			const range = data.range.long != null ?
 				`${data.range.normal}, ${data.range.long}` :
 				`${data.range.normal}`;
-			return `Damage Dice: ${damageDice} \nRange: ${range}`;
+			return `Damage: ${damageDice} ${damageType} \nRange: ${range}`;
 		});
 };
 
