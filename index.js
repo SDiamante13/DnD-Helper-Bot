@@ -27,6 +27,9 @@ bot.on('message', message => {
 	case 'weapon':
 		bot.commands.get('weapon').execute(message, args);
 		break;
+	case 'monster':
+		bot.commands.get('monster').execute(message, args);
+		break;
 	case 'help':
 		bot.commands.get('help').execute(message, args);
 		break;
